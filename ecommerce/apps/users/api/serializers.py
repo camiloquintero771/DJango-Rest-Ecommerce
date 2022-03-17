@@ -3,6 +3,10 @@ from apps.users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """ Clase creada para implementar serializer del modelo User
+        utiliza el metodo CREATE y UPDATE para encriptar la contraseña
+        del usuario, cuando se crea por primera vez o cuando se actualiza"""
+
     class Meta:
         model = User
         fields = '__all__'
