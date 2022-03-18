@@ -33,8 +33,7 @@ class CategoryProduct(BaseModel):
      realizo el cambio en el modelo """
     description = models.CharField('Descripción', max_length=50, blank=False,
                                    null=False, unique=True)
-    measureunit = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE,
-                                    verbose_name='Unidad de medida')
+
     historical = HistoricalRecords()
 
     @property
@@ -56,14 +55,14 @@ class CategoryProduct(BaseModel):
 class Indicator(BaseModel):
     """ Modelo para crear los de descuentos que se asignan a cada categorias
     de los productos.
-    Contiene las funiciones _history_user para lograr resgitrar cual usuario
+    Contiene las funciones _history_user para lograr resgitrar cual usuario
     realizo el cambio en el modelo """
 
     descount_value = models.PositiveSmallIntegerField(
         default=0, verbose_name='Valor de descuento')
     category_product = models.ForeignKey(CategoryProduct,
                                          on_delete=models.CASCADE,
-                                         verbose_name='Indicador de oferta')
+                                         verbose_name='Categoria de producto')
     historical = HistoricalRecords()
 
     @property
@@ -92,8 +91,14 @@ class Product(BaseModel):
                             blank=False, null=False)
     description = models.TextField('Descripcion de producto', blank=False,
                                    null=False)
-    image = models.ImageField('Imagen del producto', upload_to='products/',
+    image = models.ImageField('Imagen del producto',
+                              upload_to='products/',
                               blank=True, null=True)
+    measureunit = models.ForeignKey(MeasureUnit, on_delete=models.CASCADE,
+                                    verbose_name='Unidad de medida')
+    category_product = models.ForeignKey(CategoryProduct,
+                                         on_delete=models.CASCADE,
+                                         verbose_name='Categoria de producto')
     historical = HistoricalRecords()
 
     @property

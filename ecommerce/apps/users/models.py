@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                             null=True)
     last_name = models.CharField('Apellidos', max_length=255, blank=True,
                                  null=True)
-    image = models.ImageField('Imagen de perfil', upload_to='perfil/',
+    image = models.ImageField('Imagen de perfil', upload_to='perfil_image/',
                               max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
